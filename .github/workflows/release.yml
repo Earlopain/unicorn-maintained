@@ -38,8 +38,8 @@ jobs:
         echo "---" >$HOME/.gem/credentials
         echo ":github: Bearer ${GITHUB_TOKEN}" >> $HOME/.gem/credentials
 
-      - name: Build
-        run: gem build unicorn.gemspec
+    - name: Build
+      run: gem build unicorn.gemspec
 
-      - name: Publish
-        run: gem push --key github --host https://rubygems.pkg.github.com/earlopain $(find unicorn-*.gem)
+    - name: Publish
+      run: gem push --key github --host https://rubygems.pkg.github.com/earlopain $(find unicorn-*.gem)
