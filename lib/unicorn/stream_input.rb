@@ -16,7 +16,7 @@ class Unicorn::StreamInput
     @socket = socket
     @parser = request
     @buf = request.buf
-    @rbuf = ''
+    @rbuf = ''.dup
     @bytes_read = 0
     filter_body(@rbuf, @buf) unless @buf.empty?
   end
