@@ -1,4 +1,5 @@
 # -*- encoding: binary -*-
+# frozen_string_literal: false
 
 # When processing uploads, unicorn may expose a StreamInput object under
 # "rack.input" of the Rack environment when
@@ -16,7 +17,7 @@ class Unicorn::StreamInput
     @socket = socket
     @parser = request
     @buf = request.buf
-    @rbuf = ''.dup
+    @rbuf = ''
     @bytes_read = 0
     filter_body(@rbuf, @buf) unless @buf.empty?
   end
