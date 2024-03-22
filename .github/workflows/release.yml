@@ -1,0 +1,45 @@
+name: Releases
+
+on: 
+  push:
+    tags:
+    - '*'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install ragel
+      run: sudo apt-get install -y ragel
+
+    - name: Set up Ruby 3.3
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        ruby-version: '3.3'
+
+    - name: Setup Release Credentials
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 600 $HOME/.gem/credentials
+        echo "---" >$HOME/.gem/credentials
+        echo ":github: Bearer ${GITHUB_TOKEN}" >> $HOME/.gem/credentials
+
+      - name: Build
+        run: gem build unicorn.gemspec
+
+      - name: Publish
+        run: gem push --key github --host https://rubygems.pkg.github.com/earlopain $(find unicorn-*.gem)
