@@ -18,7 +18,7 @@ jobs:
 
       - name: Get Upstream Commit
         env:
-          CURRENT_COMMIT: 31d0539878b0e2247a4f98bc0241e05d4738e500
+          CURRENT_COMMIT: d71d3285ea29f0978bd0b35a366a1470ca69be18
           GH_TOKEN: ${{ github.token }}
         run: |
           previous_issue_number=$(gh issue list --label "upstream change" --json number --jq '.[0].number')
