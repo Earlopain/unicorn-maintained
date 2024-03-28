@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Get Upstream Commit
         env:
           CURRENT_COMMIT: 31d0539878b0e2247a4f98bc0241e05d4738e500
