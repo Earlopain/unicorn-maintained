@@ -17,6 +17,7 @@ jobs:
       - name: Get Upstream Commit
         env:
           CURRENT_COMMIT: 31d0539878b0e2247a4f98bc0241e05d4738e500
+          GH_TOKEN: ${{ github.token }}
         run: |
           previous_issue_number=$(gh issue list --label "upstream change" --json number --jq '.[0].number')
           if [[ -n $previous_issue_number ]]; then
